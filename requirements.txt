@@ -1,0 +1,49 @@
+# ============================================================
+# EcoGraphRAG — Laptop Requirements (CPU only, no GPU needed)
+# ============================================================
+# Install with: pip install -r requirements_laptop.txt
+# Then run:     python -m spacy download en_core_web_sm
+# ============================================================
+
+# Dataset loading
+datasets>=2.21.0
+huggingface-hub>=0.24.0
+
+# Embeddings (used for FAISS index building)
+sentence-transformers>=3.0.1
+
+# Vector index (CPU version — no GPU needed)
+faiss-cpu>=1.9.0
+
+# NLP / NER for graph construction
+spacy>=3.7.6
+
+# Graph construction and traversal
+networkx>=3.3
+
+# BM25 baseline
+rank-bm25>=0.2.2
+
+# Evaluation and text processing
+nltk>=3.9.1
+numpy>=1.26.4
+scikit-learn>=1.5.1
+
+# Data handling
+pandas>=2.2.2
+
+# Visualization (optional — for plotting results)
+matplotlib>=3.9.1
+seaborn>=0.13.2
+
+# Notebook environment
+jupyter>=1.0.0
+notebook>=7.2.1
+ipykernel>=6.29.5
+
+# Utilities
+tqdm>=4.66.5
+python-dotenv>=1.0.1
+
+# Serialization
+jsonlines>=4.0.0

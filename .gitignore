@@ -1,0 +1,29 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Outputs and indices (regenerable)
+indices/
+outputs/
+
+# Data files (large, regenerable by running the pipeline)
+data/*.json
+data/*.pkl
+
+# Egg info
+*.egg-info/
+
+# Project docs (large, not source code)
+EcoGraphRAG_PRD.docx
+EcoGraphRAG_PRD.md
+
+# OS files
+.DS_Store
+Thumbs.db
