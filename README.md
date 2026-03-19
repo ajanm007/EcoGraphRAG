@@ -1,6 +1,6 @@
 # EcoGraphRAG
 
-📄 **Paper:** [Coming soon — IEEE submission in progress]
+📄 **Paper:** [Coming soon]
 
 **Graph-enhanced Retrieval-Augmented Generation for multi-hop question answering.**
 
