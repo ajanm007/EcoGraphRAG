@@ -1,5 +1,7 @@
 # EcoGraphRAG
 
+📄 **Paper:** [Coming soon — IEEE submission in progress]
+
 **Graph-enhanced Retrieval-Augmented Generation for multi-hop question answering.**
 
 EcoGraphRAG augments a standard flat RAG pipeline with a knowledge graph built from named-entity co-occurrence. By traversing entity relationships at query time and merging graph-retrieved context with dense (FAISS) and sparse (BM25) retrievers, EcoGraphRAG improves answer accuracy on multi-hop benchmarks — with careful calibration of graph parameters.
@@ -16,7 +18,22 @@ EcoGraphRAG augments a standard flat RAG pipeline with a knowledge graph built f
 | **NER** | spaCy `en_core_web_sm` |
 | **Graph** | NetworkX entity co-occurrence graph |
 | **Generator** | Mistral-7B-Instruct-v0.2 (4-bit quantised, greedy decoding) |
-| **Evaluation** | Exact Match · F1 · ROUGE-L · BERTScore |
+| **Evaluation** | Exact Match · F1 (standard HotpotQA metrics) |
+
+---
+
+## Key Results (HotpotQA, 500 questions)
+
+| System | EM | F1 | F1 Bridge | Latency |
+|---|---|---|---|---|
+| BM25 + Mistral-7B | 20.6% | 37.7% | 40.3% | 3.82s |
+| Flat RAG + Mistral-7B | 26.0% | 45.3% | 48.0% | 3.61s |
+| Graph-RAG default (depth=2) | 21.2% | 38.8% | 40.3% | 4.15s |
+| **EcoGraphRAG K3 (Ours)** | **25.0%** | **45.9%** | **49.2%** | **2.87s** |
+
+**Key finding:** BFS depth=2 traverses avg 8,569 nodes (34% of graph) causing context flooding (p<0.001, −6.54% F1). Depth=1 reduces traversal to 663 nodes (13× reduction) achieving statistical parity with flat RAG (p=0.55) at 20% lower latency.
+
+**Hardware:** Indexing on 16GB CPU laptop (610s, 81.8MB RAM, zero LLM calls). Inference on free-tier Colab T4 GPU.
 
 ---
 
@@ -108,7 +125,7 @@ All hyperparameters live in [`config/settings.py`](config/settings.py). Key knob
 | `CHUNK_SIZE` | 300 | Tokens per chunk |
 | `CHUNK_OVERLAP` | 50 | Token overlap between chunks |
 | `FAISS_TOP_K` | 5 | Chunks retrieved by FAISS |
-| `BFS_DEPTH` | 2 | Graph traversal hops from query entities |
+| `BFS_DEPTH` | 1 | Graph traversal hops (depth=2 causes context flooding — see paper findings) |
 | `GRAPH_TOP_K` | 5 | Chunks retrieved via graph |
 | `GRAPH_WEIGHT` | 0.5 | Merge weight for graph-retrieved chunks |
 | `MERGED_TOP_K` | 6 | Final chunks sent to the LLM |

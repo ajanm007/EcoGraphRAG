@@ -82,7 +82,7 @@ ENTITY_TYPES = [
 ]
 
 # Graph traversal
-BFS_DEPTH = 2                           # Hops from query entities
+BFS_DEPTH = 1                           # Hops from query entities (depth=2 causes context flooding)
 GRAPH_TOP_K = 5                         # Max chunks from graph retrieval
 
 
