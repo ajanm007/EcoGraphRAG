@@ -50,7 +50,7 @@ EcoGraphRAG/
 │   ├── graph_builder.py       # Entity co-occurrence graph construction
 │   ├── bm25_retriever.py      # BM25 sparse retrieval baseline
 │   ├── merged_retriever.py    # Weighted merge of FAISS + graph retrievers
-│   ├── evaluator.py           # EM / F1 / ROUGE-L / BERTScore metrics
+│   ├── evaluator.py           # EM / F1
 │   └── checkpointer.py       # Incremental checkpoint save/resume
 ├── notebooks/
 │   ├── 01_embeddings_faiss.ipynb    # Build FAISS index from chunk embeddings
